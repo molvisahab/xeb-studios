@@ -1,0 +1,6 @@
+Optional cover images go here.
+
+JPG, named after the video: menuprob.mp4 -> menuprob.jpg
+Then add a poster line to that film in index.html:  poster: "menuprob.jpg",
+
+Skip these and the browser uses the first frame of each video instead.

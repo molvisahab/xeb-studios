@@ -1,0 +1,6 @@
+Put your video files in this folder.
+
+You do NOT need to rename them. The page tries several spellings of
+each name (with .mp4, without, .MP4) and uses whichever one opens.
+
+Format: MP4 / H.264. If a clip is MOV or ProRes, re-export it.
