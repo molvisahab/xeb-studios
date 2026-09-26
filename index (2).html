@@ -386,9 +386,12 @@ const XEB = {
   --head-weight:700;
   --head-track:-.022em;
 
-  /* background strength. Turn these down if it ever feels too much.
-     --glow is the drifting colour, --grain is the film texture. */
-  --glow:.30;
+  /* Background strength. Desktop and phone are set separately on
+     purpose: a big monitor shows a soft gradient far more clearly than
+     a small bright phone screen does, so the same number looks heavy on
+     one and invisible on the other. Change either on its own. */
+  --glow:.16;          /* on a computer */
+  --glow-phone:.40;    /* on a phone */
   --grain:.035;
 
   --gut:clamp(18px,4.5vw,64px);
@@ -430,20 +433,48 @@ html[data-font="editorial"]{
 }
 .bg span{
   position:absolute;border-radius:50%;
-  filter:blur(110px);
+  /* the gradient does the softening, so only a light blur is needed.
+     Heavy blur was washing these out to nothing on a phone. */
+  filter:blur(70px);
   opacity:var(--glow);
   will-change:transform;
 }
+/* sized off the viewport width but capped, so a phone gets a pool of
+   light that actually covers the screen and a large monitor does not
+   get one the size of a building */
 .bg span:nth-child(1){
-  width:60vw;height:60vw;left:-12vw;top:-10vw;
-  background:radial-gradient(circle,#c9a227 0%,transparent 68%);
+  width:min(125vw,1020px);height:min(125vw,1020px);
+  left:min(-28vw,-140px);top:min(-30vw,-200px);
+  background:radial-gradient(circle closest-side,
+    #d8ab24 0%, rgba(216,171,36,.55) 40%, transparent 74%);
   animation:drift1 44s ease-in-out infinite alternate;
 }
 .bg span:nth-child(2){
-  width:52vw;height:52vw;right:-10vw;top:32vh;
-  background:radial-gradient(circle,#4d7ea8 0%,transparent 68%);
+  width:min(115vw,900px);height:min(115vw,900px);
+  right:min(-30vw,-160px);top:34vh;
+  background:radial-gradient(circle closest-side,
+    #4f86b8 0%, rgba(79,134,184,.55) 40%, transparent 74%);
   animation:drift2 58s ease-in-out infinite alternate;
 }
+.bg span:nth-child(3){
+  width:min(110vw,880px);height:min(110vw,880px);
+  left:min(-24vw,-150px);bottom:-18vh;
+  background:radial-gradient(circle closest-side,
+    #a8654f 0%, rgba(168,101,79,.5) 40%, transparent 74%);
+  animation:drift3 66s ease-in-out infinite alternate;
+}
+
+/* phones: a touch stronger, because a small bright screen held at arm's
+   length shows far less of a soft gradient than a monitor does */
+/* Phones, in either orientation. Width alone is not enough: a phone
+   turned sideways is around 850px wide and would otherwise get the
+   desktop setting, so the background would change when you rotate.
+   "hover: none" is what actually identifies a touch screen. */
+@media (max-width:760px),
+       (hover:none) and (pointer:coarse) and (max-width:1100px){
+  .bg span{filter:blur(30px);opacity:var(--glow-phone)}
+}
+
 @keyframes drift1{
   from{transform:translate3d(0,0,0) scale(1)}
   to  {transform:translate3d(9vw,7vh,0) scale(1.14)}
@@ -451,6 +482,10 @@ html[data-font="editorial"]{
 @keyframes drift2{
   from{transform:translate3d(0,0,0) scale(1.08)}
   to  {transform:translate3d(-8vw,-9vh,0) scale(1)}
+}
+@keyframes drift3{
+  from{transform:translate3d(0,0,0) scale(1)}
+  to  {transform:translate3d(7vw,-6vh,0) scale(1.12)}
 }
 /* film grain, drawn by the browser, no image file */
 .grain{
@@ -895,7 +930,7 @@ img,video{display:block;max-width:100%}
 </head>
 <body>
 
-<div class="bg" aria-hidden="true"><span></span><span></span></div>
+<div class="bg" aria-hidden="true"><span></span><span></span><span></span></div>
 <div class="grain" aria-hidden="true"></div>
 
 <header class="topbar">
