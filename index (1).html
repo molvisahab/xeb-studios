@@ -63,10 +63,9 @@ const XEB = {
     phone: "+92 331 2211273",
     email: "ammarkardar@gmail.com",
 
-    /* NOTE: these two addresses are not live yet. They are here as
-       placeholders. Change showStudioEmails to false to hide them,
-       or edit the addresses once the domain is set up. */
-    showStudioEmails: true,
+    /* Hidden for now because the domain is not bought yet. When it is,
+       change this back to true and they appear again. */
+    showStudioEmails: false,
     studioEmails: ["ammar@xebstudios.com", "sales@xebstudios.com"]
   },
 
@@ -239,7 +238,112 @@ const XEB = {
 
   ],
 
-  /* ---- 6. WHAT WE DO ------------------------------------------------ */
+  /* ---- 6. THE TEAM --------------------------------------------------- */
+  /*
+     name    the person's name
+     role    their title
+     does    one line on what they are responsible for
+     email   optional. Leave as "" and no email shows for that person.
+
+     CHECK THESE. I have filled in what I know from our earlier work,
+     but correct the names, titles and wording to whatever is right.
+  */
+
+  team: [
+    { name: "Ammar Kardar",
+      role: "Founder and Managing Director",
+      does: "Runs the studio. Takes on every client himself, sets the " +
+            "brief with them, and keeps the content, editing and " +
+            "development teams pointed at the same job.",
+      email: "ammarkardar@gmail.com",
+      instagram: "https://www.instagram.com/ammar_kardar",
+      handle: "@ammar_kardar" },
+
+    { name: "Ahmad Zeb",
+      role: "Co-founder and Creative Director",
+      does: "Owns everything on screen. Ideation, scripting and the " +
+            "edit, with his own editing team behind him.",
+      email: "xebedits@gmail.com",
+      instagram: "https://www.instagram.com/xeb.mov",
+      handle: "@xeb.mov" }
+  ],
+
+  /* ---- 7. HOW WE WORK ------------------------------------------------ */
+  /* A real sequence, so it is numbered on the page. Add or remove steps
+     and the numbering follows automatically. */
+
+  process: [
+    { name: "We talk first",
+      detail: "What you sell, who walks in, and what the next month " +
+              "actually needs. Usually one call." },
+    { name: "We come and shoot",
+      detail: "One visit to your place. We film enough in a day to " +
+              "cover weeks of posting." },
+    { name: "We cut and you review",
+      detail: "First cuts come back to you fast. One round of changes " +
+              "is built into every job." },
+    { name: "You post it",
+      detail: "Delivered sized, captioned and graded for the feed. " +
+              "Nothing left for you to fix." }
+  ],
+
+  /* ---- 8. COMMON QUESTIONS ------------------------------------------ */
+  /*
+     IMPORTANT: these are promises a client will hold you to. Read every
+     answer and change anything you would not want to be held to,
+     especially the turnaround times and the money one.
+  */
+
+  faq: [
+    { q: "What do you actually provide?",
+      a: "Short-form video, start to finish. We plan the content, come " +
+         "and shoot it, edit it, add the graphics and hand it over sized " +
+         "and captioned for Instagram, TikTok and Shorts. We also do " +
+         "motion graphics and product animation, and because the same " +
+         "company builds software, we can build the website, menu or " +
+         "booking page your content points at." },
+
+    { q: "How long does it take?",
+      a: "One shoot day usually gives us enough for a month of posting. " +
+         "First cuts come back to you within a few days of the shoot, " +
+         "and one round of changes is included in every job. If you need " +
+         "something for a launch date, tell us the date and we work back " +
+         "from it." },
+
+    { q: "What is the process?",
+      a: "Four steps. We talk about what you sell and what the month " +
+         "needs. We come to your place and shoot. We cut, you review and " +
+         "ask for changes. You get the finished files ready to post. You " +
+         "deal with the founders the whole way through, not an account " +
+         "manager." },
+
+    { q: "What do you need from us?",
+      a: "Access to your place for the shoot, one person who can approve " +
+         "the cuts, and whatever you already have: menu, offers, product " +
+         "list, brand colours. If you have none of that, we work it out " +
+         "on the first call. You do not need a script or a plan before " +
+         "you talk to us." },
+
+    { q: "What does it cost?",
+      a: "It depends on how many films you want and whether we shoot or " +
+         "work from footage you already have. There is no fixed package, " +
+         "because a cafe with one branch and a brand running a campaign " +
+         "do not need the same thing. Tell us your budget and what you " +
+         "want out of it, and we will tell you honestly what is possible " +
+         "inside it." },
+
+    { q: "Why XEB Studios and not someone else?",
+      a: "Because we get paid to grow your business, not ours. Every " +
+         "film is made to bring you reach, enquiries and customers, not " +
+         "to look good in our own portfolio. We build organic content " +
+         "that earns attention instead of renting it from ads. And we " +
+         "are not only a content team: we build software and IT systems " +
+         "too, so the website, booking page or tool your content sends " +
+         "people to can come from the same place, priced to your budget " +
+         "rather than ours." }
+  ],
+
+  /* ---- 9. WHAT WE DO ------------------------------------------------ */
 
   services: [
     { name: "Reels and short-form",
@@ -282,6 +386,11 @@ const XEB = {
   --head-weight:700;
   --head-track:-.022em;
 
+  /* background strength. Turn these down if it ever feels too much.
+     --glow is the drifting colour, --grain is the film texture. */
+  --glow:.30;
+  --grain:.035;
+
   --gut:clamp(18px,4.5vw,64px);
   --maxw:1340px;
 }
@@ -310,6 +419,57 @@ html[data-font="editorial"]{
   --hero-track:-.014em;
 }
 
+/* ---------- the background ----------
+   Two very soft pools of light drifting behind everything, at low
+   opacity, plus a faint film grain. It sits under every section and
+   never catches the eye. Both stop for anyone who has reduced motion
+   turned on. */
+.bg{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  overflow:hidden;
+}
+.bg span{
+  position:absolute;border-radius:50%;
+  filter:blur(110px);
+  opacity:var(--glow);
+  will-change:transform;
+}
+.bg span:nth-child(1){
+  width:60vw;height:60vw;left:-12vw;top:-10vw;
+  background:radial-gradient(circle,#c9a227 0%,transparent 68%);
+  animation:drift1 44s ease-in-out infinite alternate;
+}
+.bg span:nth-child(2){
+  width:52vw;height:52vw;right:-10vw;top:32vh;
+  background:radial-gradient(circle,#4d7ea8 0%,transparent 68%);
+  animation:drift2 58s ease-in-out infinite alternate;
+}
+@keyframes drift1{
+  from{transform:translate3d(0,0,0) scale(1)}
+  to  {transform:translate3d(9vw,7vh,0) scale(1.14)}
+}
+@keyframes drift2{
+  from{transform:translate3d(0,0,0) scale(1.08)}
+  to  {transform:translate3d(-8vw,-9vh,0) scale(1)}
+}
+/* film grain, drawn by the browser, no image file */
+.grain{
+  position:fixed;inset:-120px;z-index:0;pointer-events:none;
+  opacity:var(--grain);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grainShift 700ms steps(4) infinite;
+}
+@keyframes grainShift{
+  0%{transform:translate(0,0)}      25%{transform:translate(-4%,3%)}
+  50%{transform:translate(3%,-4%)}  75%{transform:translate(-3%,-2%)}
+  100%{transform:translate(0,0)}
+}
+/* everything else sits above the background */
+.topbar,main,.lb,.trouble{position:relative;z-index:1}
+.topbar{z-index:30}
+.lb{z-index:60}
+.trouble{z-index:80}
+
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 body{
@@ -329,7 +489,7 @@ img,video{display:block;max-width:100%}
 .shell{max-width:var(--maxw);margin:0 auto;padding-inline:var(--gut)}
 
 /* stop the sticky bar covering a section when a nav link jumps to it */
-#work,#services,#contact,#top{scroll-margin-top:72px}
+#work,#services,#process,#team,#contact,#top{scroll-margin-top:72px}
 
 /* ===================== top bar ===================== */
 .topbar{
@@ -550,6 +710,87 @@ img,video{display:block;max-width:100%}
 .svc-n{font-family:var(--head-face);font-size:17px;font-weight:var(--head-weight);letter-spacing:-.012em;margin:0 0 6px}
 .svc-d{font-size:14px;color:var(--dim);margin:0;max-width:36ch}
 
+/* ---------- how we work ----------
+   This one really is a sequence, so the steps are numbered. */
+.proc-wrap{padding-block:clamp(34px,5vw,64px);border-bottom:1px solid var(--hair)}
+.proc{
+  list-style:none;margin:clamp(24px,3vw,38px) 0 0;padding:0;
+  display:grid;gap:1px;background:var(--hair);
+  border-block:1px solid var(--hair);
+  grid-template-columns:repeat(auto-fit,minmax(215px,1fr));
+}
+.proc li{background:var(--ink);padding:22px 20px 24px}
+.proc-num{
+  font-family:var(--mono);font-size:11.5px;color:var(--rec);
+  display:block;margin-bottom:10px;
+}
+.proc-n{
+  font-family:var(--head-face);font-size:17px;
+  font-weight:var(--head-weight);letter-spacing:-.012em;margin:0 0 6px;
+}
+.proc-d{font-size:14px;color:var(--dim);margin:0;max-width:32ch}
+
+/* ---------- the team ---------- */
+.team-wrap{padding-block:clamp(34px,5vw,64px);border-bottom:1px solid var(--hair)}
+.team{
+  display:grid;gap:clamp(24px,3vw,44px);
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  margin-top:clamp(24px,3vw,38px);
+}
+.person{border-top:1px solid var(--hair-lit);padding-top:18px}
+.person-n{
+  font-family:var(--head-face);
+  font-size:clamp(20px,2.2vw,25px);
+  font-weight:var(--head-weight);letter-spacing:var(--head-track);
+  margin:0 0 3px;
+}
+.person-r{font-size:14px;color:var(--rec);margin:0 0 12px}
+.person-d{font-size:14.5px;color:var(--dim);margin:0;max-width:40ch}
+.person-links{display:flex;flex-wrap:wrap;gap:9px 20px;margin-top:15px}
+.person-e{
+  font-size:14px;
+  color:var(--paper);text-decoration:none;
+  border-bottom:1px solid var(--hair-lit);padding-bottom:3px;
+}
+.person-e:hover{color:var(--rec);border-color:var(--rec)}
+
+/* ---------- the buttons under the closing line ---------- */
+.cta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+
+/* ---------- common questions ----------
+   Built on <details> so it opens with a click or the keyboard and
+   works even if the script never runs. */
+.faq-lab{
+  font-family:var(--mono);font-size:11.5px;color:var(--dim);
+  margin:0 0 6px;
+}
+.faq details{
+  border-top:1px solid var(--hair);
+}
+.faq details:last-of-type{border-bottom:1px solid var(--hair)}
+.faq summary{
+  list-style:none;cursor:pointer;
+  padding:15px 30px 15px 0;position:relative;
+  font-size:15.5px;font-weight:600;line-height:1.4;
+  transition:color .18s ease;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:hover{color:var(--rec)}
+.faq summary::after{
+  content:"";position:absolute;right:6px;top:calc(50% - 1px);
+  width:11px;height:1px;background:var(--dim);
+}
+.faq summary::before{
+  content:"";position:absolute;right:11px;top:calc(50% - 6px);
+  width:1px;height:11px;background:var(--dim);
+  transition:transform .22s ease,opacity .22s ease;
+}
+.faq details[open] summary::before{transform:rotate(90deg);opacity:0}
+.faq-a{
+  font-size:14.5px;color:var(--dim);line-height:1.62;
+  margin:0;padding:0 8px 18px 0;max-width:52ch;
+}
+
 /* ===================== contact ===================== */
 .contact{padding-block:clamp(40px,6vw,80px)}
 .contact-in{
@@ -648,10 +889,14 @@ img,video{display:block;max-width:100%}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *{transition:none !important;animation:none !important}
+  .grain{display:none}
 }
 </style>
 </head>
 <body>
+
+<div class="bg" aria-hidden="true"><span></span><span></span></div>
+<div class="grain" aria-hidden="true"></div>
 
 <header class="topbar">
   <div class="topbar-in">
@@ -659,6 +904,7 @@ img,video{display:block;max-width:100%}
     <nav class="topnav">
       <a href="#work">Work</a>
       <a href="#services">What we do</a>
+      <a href="#team">Team</a>
       <a href="#contact">Contact</a>
     </nav>
   </div>
@@ -704,16 +950,27 @@ img,video{display:block;max-width:100%}
     <div class="svc" id="svc"></div>
   </section>
 
+  <section class="shell proc-wrap" id="process">
+    <p class="section-t">How we work</p>
+    <h2 class="section-h">Four steps, and you are posting.</h2>
+    <ol class="proc" id="proc"></ol>
+  </section>
+
+  <section class="shell team-wrap" id="team">
+    <p class="section-t">Who you are working with</p>
+    <h2 class="section-h">You deal with the founders, not an account manager.</h2>
+    <div class="team" id="team-list"></div>
+  </section>
+
   <section class="shell contact" id="contact">
     <div class="contact-in">
       <div>
         <h2 class="contact-h">Let's make something for your business.</h2>
         <p class="contact-p" id="pitch"></p>
+        <div class="cta-row" id="cta-row"></div>
       </div>
-      <div class="card">
-        <p class="card-n" id="cn"></p>
-        <p class="card-r" id="cr"></p>
-        <div class="card-rows" id="crows"></div>
+      <div class="faq" id="faq">
+        <p class="faq-lab">Common questions</p>
       </div>
     </div>
   </section>
@@ -1034,30 +1291,97 @@ img,video{display:block;max-width:100%}
     reveal(d, (i % 3) * 70);
   });
 
-  document.querySelectorAll(".section-head, .svc-wrap > .section-t, .svc-wrap > .section-h")
-    .forEach(function(n){ reveal(n); });
+  /* ---------------------------------------------------------------
+     How we work
+     --------------------------------------------------------------- */
+  var proc = document.getElementById("proc");
+  (D.process || []).forEach(function(s, i){
+    var li = el("li");
+    var num = el("span","proc-num");
+    num.textContent = String(i + 1).padStart(2, "0");
+    var n = el("p","proc-n"); n.textContent = s.name;
+    var d = el("p","proc-d"); d.textContent = s.detail;
+    li.appendChild(num); li.appendChild(n); li.appendChild(d);
+    proc.appendChild(li);
+    reveal(li, (i % 4) * 70);
+  });
+
+  /* ---------------------------------------------------------------
+     The team
+     --------------------------------------------------------------- */
+  var teamList = document.getElementById("team-list");
+  (D.team || []).forEach(function(p, i){
+    var box = el("div","person");
+    var n = el("p","person-n"); n.textContent = p.name;
+    var r = el("p","person-r"); r.textContent = p.role;
+    var d = el("p","person-d"); d.textContent = p.does;
+    box.appendChild(n); box.appendChild(r); box.appendChild(d);
+
+    var links = el("div","person-links");
+    if (p.email){
+      var a = el("a","person-e");
+      a.href = "mailto:" + p.email;
+      a.textContent = p.email;
+      links.appendChild(a);
+    }
+    if (p.instagram){
+      var ig = el("a","person-e");
+      ig.href = p.instagram;
+      ig.target = "_blank"; ig.rel = "noopener";
+      ig.textContent = p.handle || "Instagram";
+      links.appendChild(ig);
+    }
+    if (links.children.length) box.appendChild(links);
+
+    teamList.appendChild(box);
+    reveal(box, (i % 3) * 80);
+  });
+
+  document.querySelectorAll(
+    ".section-head, .svc-wrap > .section-t, .svc-wrap > .section-h," +
+    ".proc-wrap > .section-t, .proc-wrap > .section-h," +
+    ".team-wrap > .section-t, .team-wrap > .section-h"
+  ).forEach(function(n){ reveal(n); });
   reveal(document.querySelector(".contact-in > div"));
   reveal(document.querySelector(".contact-in .card"), 110);
 
   /* ---------------------------------------------------------------
      Contact card
      --------------------------------------------------------------- */
-  document.getElementById("cn").textContent = D.contact.name || "";
-  document.getElementById("cr").textContent = D.contact.role || "";
+  /* WhatsApp first, because that is where enquiries should land */
+  var ctaRow = document.getElementById("cta-row");
+  if (D.contact.phone){
+    var tel2 = D.contact.phone.replace(/[^\d+]/g,"");
+    var w = el("a","btn btn--solid");
+    w.href = "https://wa.me/" + tel2.replace(/^\+/,"");
+    w.target = "_blank"; w.rel = "noopener";
+    w.textContent = "Message us on WhatsApp";
+    ctaRow.appendChild(w);
 
-  var rows = document.getElementById("crows");
-  function row(label, href){
-    if (!label || !href) return;
-    var a = el("a"); a.href = href; a.textContent = label;
-    if (href.indexOf("http") === 0){ a.target = "_blank"; a.rel = "noopener"; }
-    rows.appendChild(a);
+    var c = el("a","btn"); c.href = "tel:" + tel2;
+    c.textContent = D.contact.phone;
+    ctaRow.appendChild(c);
   }
-  if (D.contact.phone) row(D.contact.phone, "tel:" + D.contact.phone.replace(/[^\d+]/g,""));
-  if (D.contact.email) row(D.contact.email, "mailto:" + D.contact.email);
+  if (D.contact.email){
+    var m = el("a","btn");
+    m.href = "mailto:" + D.contact.email + "?subject=" +
+             encodeURIComponent("Enquiry for " + D.studio);
+    m.textContent = "Email us";
+    ctaRow.appendChild(m);
+  }
 
-  if (D.contact.showStudioEmails && D.contact.studioEmails){
-    D.contact.studioEmails.forEach(function(e){ row(e, "mailto:" + e); });
-  }
+  /* common questions */
+  var faq = document.getElementById("faq");
+  (D.faq || []).forEach(function(item, i){
+    var box = document.createElement("details");
+    var sum = document.createElement("summary");
+    sum.textContent = item.q;
+    var ans = el("p","faq-a");
+    ans.textContent = item.a;
+    box.appendChild(sum); box.appendChild(ans);
+    faq.appendChild(box);
+    reveal(box, (i % 6) * 45);
+  });
 
   /* the bar only grows a border once the page has moved */
   var bar = document.querySelector(".topbar");
